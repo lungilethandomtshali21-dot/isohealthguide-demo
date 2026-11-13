@@ -1,0 +1,354 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IsoHealthGuide SA — Clickable Prototype</title>
+<style>
+:root{--g:#174b43;--m:#e9f3ee;--ink:#19342f;--muted:#64756f;--line:#dce6e0}
+*{box-sizing:border-box}
+body{margin:0;background:#edf1ed;color:var(--ink);font:15px Arial,sans-serif}
+.wrap{max-width:1000px;margin:25px auto;padding:0 16px}
+.notice{background:#fff4d9;border:1px solid #eed99e;padding:12px;border-radius:10px;font-size:13px;margin-bottom:12px}
+.app{display:grid;grid-template-columns:230px 1fr;background:white;border:1px solid var(--line);border-radius:20px;overflow:hidden;min-height:650px;box-shadow:0 15px 45px #173d3615}
+.side{background:var(--g);color:white;padding:25px}
+.logo{font-size:20px;font-weight:bold}
+.logo small{display:block;color:#c6ded3;font-size:10px;letter-spacing:1px;margin-top:6px}
+.side p{color:#d4e5dd;font-size:13px;line-height:1.5;margin:25px 0}
+.steps{display:grid;gap:16px;margin-top:28px}
+.step{color:#c5d9d0;font-size:13px}
+.step b{display:inline-grid;place-items:center;border:1px solid #8db0a2;border-radius:50%;width:24px;height:24px;margin-right:8px}
+.step.active{color:white;font-weight:bold}
+.step.active b{background:white;color:var(--g)}
+.main{padding:28px;display:flex;flex-direction:column}
+.top{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:25px;color:var(--g);font-size:11px;letter-spacing:1px;font-weight:bold}
+.top select{border:1px solid var(--line);border-radius:8px;padding:8px;color:var(--ink)}
+.panel{max-width:650px;width:100%;margin:auto}
+.screen{display:none}
+.screen.active{display:block}
+.tag{font-size:11px;font-weight:bold;letter-spacing:1px;color:#23675b;background:var(--m);padding:7px 10px;border-radius:20px}
+h1{font-size:34px;line-height:1.1;letter-spacing:-1px;margin:20px 0 12px}
+h2{font-size:25px;margin:18px 0 10px}
+p{color:var(--muted);line-height:1.6}
+.card,.summary{border:1px solid var(--line);border-radius:13px;padding:16px;margin:14px 0}
+.choice{display:block;width:100%;text-align:left;background:white;border:1px solid var(--line);border-radius:11px;padding:14px;margin:8px 0;cursor:pointer;color:var(--ink)}
+.choice.selected,.choice:hover{background:var(--m);border-color:#39816f}
+.choice small{display:block;color:var(--muted);margin-top:5px}
+label{display:block;font-weight:bold;font-size:13px;margin:15px 0 7px}
+textarea,input{width:100%;border:1px solid var(--line);border-radius:10px;padding:12px;font:inherit;color:var(--ink)}
+textarea{min-height:75px;resize:vertical}
+.btnrow{display:flex;gap:9px;margin-top:20px;flex-wrap:wrap}
+.btn{border:0;border-radius:10px;background:var(--g);color:white;padding:12px 17px;font-weight:bold;cursor:pointer}
+.btn.secondary{background:#edf3ef;color:var(--g)}
+.btn:disabled{opacity:.4}
+.summary strong{display:block;color:#23675b;font-size:11px;letter-spacing:1px;text-transform:uppercase;margin:10px 0 4px}
+.summary p{margin:0;color:var(--ink)}
+.foot{border-top:1px solid var(--line);padding-top:13px;margin-top:28px;color:#71817a;font-size:11px}
+@media(max-width:700px){
+.app{grid-template-columns:1fr}
+.side p,.steps{display:none}
+.side{padding:17px}
+.main{padding:18px}
+h1{font-size:29px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="notice">
+<b>Concept prototype only:</b>
+This is a clickable demonstration, not a live health service. It does not diagnose, recommend treatment, send messages or store your answers.
+</div>
+
+<div class="app">
+<aside class="side">
+<div class="logo">IsoHealthGuide SA
+<small>HEALTH COMMUNICATION, MADE CLEARER</small>
+</div>
+<p>A proposed multilingual assistant to help people understand general health information and prepare for healthcare conversations.</p>
+
+<div class="steps">
+<div class="step active"><b>1</b> Welcome</div>
+<div class="step"><b>2</b> Language</div>
+<div class="step"><b>3</b> Your concern</div>
+<div class="step"><b>4</b> Prepare to speak</div>
+<div class="step"><b>5</b> Review & appointment</div>
+<div class="step"><b>6</b> After-visit reminders</div>
+</div>
+</aside>
+
+<main class="main">
+<div class="top">
+<span>INTERACTIVE PRODUCT CONCEPT</span>
+<select id="topLang">
+<option>English</option>
+<option>isiZulu (planned)</option>
+<option>Sesotho (planned)</option>
+<option>Sepedi (planned)</option>
+<option>Afrikaans (planned)</option>
+</select>
+</div>
+
+<div class="panel">
+
+<section class="screen active" id="s0">
+<span class="tag">WELCOME</span>
+<h1>Health information should be easier to understand.</h1>
+<p>IsoHealthGuide SA is being designed to help people access understandable health information and communicate their concerns with confidence.</p>
+<div class="card">
+<b>What this demonstration shows</b>
+<p>A proposed journey: choose a language, organise a concern, answer structured prompts and review a summary you control.</p>
+</div>
+<button class="btn" onclick="go(1)">Start demonstration →</button>
+</section>
+
+<section class="screen" id="s1">
+<span class="tag">STEP 1 · LANGUAGE</span>
+<h2>Which language would you prefer?</h2>
+<p>These five languages are planned for development. Only the English flow is implemented in this prototype.</p>
+
+<div id="langs">
+<button class="choice selected" onclick="lang(this,'English')">English <small>Demonstration language</small></button>
+<button class="choice" onclick="lang(this,'isiZulu')">isiZulu <small>Planned — not yet available</small></button>
+<button class="choice" onclick="lang(this,'Sesotho')">Sesotho <small>Planned — not yet available</small></button>
+<button class="choice" onclick="lang(this,'Sepedi')">Sepedi <small>Planned — not yet available</small></button>
+<button class="choice" onclick="lang(this,'Afrikaans')">Afrikaans <small>Planned — not yet available</small></button>
+</div>
+
+<div class="card" id="langNote">English is selected for this demonstration. Other options are planned and not translated yet.</div>
+<div class="btnrow">
+<button class="btn secondary" onclick="go(0)">Back</button>
+<button class="btn" onclick="go(2)">Continue →</button>
+</div>
+</section>
+
+<section class="screen" id="s2">
+<span class="tag">STEP 2 · YOUR CONCERN</span>
+<h2>What would you like help preparing to discuss?</h2>
+<p>This prototype helps organise information for a healthcare conversation; it does not assess symptoms.</p>
+
+<button class="choice" onclick="concern(this,'A general health question')">I have a general health question</button>
+<button class="choice" onclick="concern(this,'A concern I want to explain to a healthcare professional')">I have a concern I want to explain to a healthcare professional</button>
+<button class="choice" onclick="concern(this,'Preparing for a clinic visit')">I am preparing for a clinic visit</button>
+
+<div class="btnrow">
+<button class="btn secondary" onclick="go(1)">Back</button>
+<button class="btn" id="nextConcern" disabled onclick="go(3)">Continue →</button>
+</div>
+</section>
+
+<section class="screen" id="s3">
+<span class="tag">STEP 3 · PREPARE FOR YOUR APPOINTMENT</span>
+<h2>Let's help you prepare what to say to the doctor.</h2>
+<p>This is your preparation space. You can organise what has been happening, what you are worried about and what you want the healthcare professional to explain.</p>
+
+<div class="card">
+<b>You can use these sentence starters at your appointment:</b>
+<p style="margin-bottom:0">
+“I came in today because…”<br>
+“What I have noticed is…”<br>
+“What I am most concerned about is…”<br>
+“I would like to understand…”
+</p>
+</div>
+
+<label>1. What is the main reason for your visit?</label>
+<textarea id="topic" placeholder="I came in today because..."></textarea>
+
+<label>2. What have you noticed, and when did it start?</label>
+<textarea id="when" placeholder="I first noticed..."></textarea>
+
+<label>3. How has this affected your daily activities? (Optional)</label>
+<textarea id="impact" placeholder="It has affected me by..."></textarea>
+
+<label>4. What are you most worried about or unsure of?</label>
+<textarea id="worry" placeholder="I am concerned about..."></textarea>
+
+<label>5. What would you like to ask the doctor?</label>
+<textarea id="ask" placeholder="I would like to ask..."></textarea>
+
+<div class="card">
+<b>Remember</b>
+<p>There is no need to use medical words. Describe things in your own words. This tool helps you prepare; it does not assess symptoms or decide what care you need.</p>
+</div>
+
+<div class="btnrow">
+<button class="btn secondary" onclick="go(2)">Back</button>
+<button class="btn" onclick="summary()">Create my appointment notes →</button>
+</div>
+</section>
+
+<section class="screen" id="s4">
+<span class="tag">STEP 4 · YOUR APPOINTMENT NOTES</span>
+<h2>Here is a way to explain it to the doctor.</h2>
+<p>Review these notes before your appointment. You can read them, practise saying them or use them to guide your conversation. Edit anything that does not sound like you.</p>
+
+<div class="summary">
+<strong>You could start by saying</strong>
+<p id="scriptText">I came in today because…</p>
+<strong>Main reason for my visit</strong>
+<p id="sc"></p>
+<strong>What I have noticed</strong>
+<p id="st"></p>
+<strong>How it affects me</strong>
+<p id="si"></p>
+<strong>What I am concerned about</strong>
+<p id="swo"></p>
+<strong>Questions I want to ask</strong>
+<p id="sa"></p>
+<strong>Preferred language</strong>
+<p id="sl"></p>
+</div>
+
+<label for="editNotes">Your speaking guide — edit it so it sounds like you</label>
+<textarea id="editNotes" placeholder="I came in today because..."></textarea>
+
+<div class="card">
+<b>Questions you may want to ask</b>
+<p style="margin-bottom:0">
+• What might be causing this?<br>
+• What should I look out for?<br>
+• What are my next steps?<br>
+• When should I come back or seek help?
+</p>
+</div>
+
+<div class="btnrow">
+<button class="btn secondary" onclick="go(3)">Back and edit answers</button>
+<button class="btn secondary" onclick="window.print()">Print / save notes</button>
+<button class="btn" onclick="saveNotesAndContinue()">Continue to after-visit support →</button>
+</div>
+</section>
+
+<section class="screen" id="s5">
+<span class="tag">STEP 5 · AFTER YOUR CLINIC VISIT</span>
+<h2>Would you like to plan a reminder?</h2>
+<p>After your appointment, you may want a reminder about a follow-up visit or something your healthcare professional asked you to do.</p>
+
+<label for="reminderType">What would you like to be reminded about?</label>
+<select id="reminderType" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;color:var(--ink)">
+<option>Follow-up clinic appointment</option>
+<option>Review the instructions given at my appointment</option>
+<option>Check in on how I am feeling</option>
+<option>Another follow-up task</option>
+</select>
+
+<label for="reminderDate">Reminder date</label>
+<input id="reminderDate" type="date">
+
+<label for="reminderTime">Reminder time</label>
+<input id="reminderTime" type="time">
+
+<label for="reminderNote">A short note (optional)</label>
+<input id="reminderNote" placeholder="Example: Bring my clinic card">
+
+<div class="card">
+<b>Prototype limitation</b>
+<p>This screen demonstrates the proposed reminder feature only. It will not send a notification or save reminder details. A real reminder service would require the user’s permission and a secure notification setup.</p>
+</div>
+
+<div class="btnrow">
+<button class="btn secondary" onclick="go(4)">Back to appointment notes</button>
+<button class="btn" onclick="finishReminder()">Save reminder plan</button>
+<button class="btn secondary" onclick="finishReminder(true)">Skip for now</button>
+</div>
+
+<div id="reminderResult" class="card" style="display:none"></div>
+</section>
+
+<section class="screen" id="s6">
+<span class="tag">DEMONSTRATION COMPLETE</span>
+<h2>Prepare. Communicate. Follow up.</h2>
+<p>You have explored the proposed IsoHealthGuide SA journey: preparing what to say to a healthcare professional, reviewing your notes and planning an after-visit reminder.</p>
+
+<div class="card">
+<b>What this prototype demonstrates</b>
+<p>A guided appointment-preparation flow, a user-reviewed speaking guide and a reminder-planning concept. No information was sent or saved.</p>
+</div>
+
+<button class="btn" onclick="location.reload()">Restart demonstration ↻</button>
+</section>
+
+</div>
+
+<div class="foot">
+IsoHealthGuide SA · Early concept prototype · English flow only · No diagnosis, treatment advice, data transmission, persistent storage or live notifications.
+</div>
+</main>
+</div>
+</div>
+
+<script>
+let L='English',C='';
+
+function go(n){
+document.querySelectorAll('.screen').forEach((e,i)=>e.classList.toggle('active',i===n));
+document.querySelectorAll('.step').forEach((e,i)=>e.classList.toggle('active',i===n));
+}
+
+function lang(el,v){
+L=v;
+document.querySelectorAll('#langs .choice').forEach(e=>e.classList.remove('selected'));
+el.classList.add('selected');
+document.getElementById('topLang').value=v==='English'?'English':v+' (planned)';
+document.getElementById('langNote').textContent=v==='English'?'English is selected for this demonstration.':'This language is planned but not translated in this prototype. The demonstration remains in English.';
+}
+
+function concern(el,v){
+C=v;
+document.querySelectorAll('#s2 .choice').forEach(e=>e.classList.remove('selected'));
+el.classList.add('selected');
+document.getElementById('nextConcern').disabled=false;
+}
+
+function summary(){
+const val=id=>document.getElementById(id).value.trim()||'Not provided';
+document.getElementById('sc').textContent=C;
+document.getElementById('st').textContent=val('when');
+document.getElementById('si').textContent=val('impact');
+document.getElementById('swo').textContent=val('worry');
+document.getElementById('sa').textContent=val('ask');
+document.getElementById('sl').textContent=L;
+
+document.getElementById('scriptText').textContent=
+'I came in today because '+(document.getElementById('topic').value.trim()||'I would like help discussing a health concern')+
+'. I have noticed '+(document.getElementById('when').value.trim()||'something I would like to explain')+
+'. I am concerned about '+(document.getElementById('worry').value.trim()||'understanding what this means')+
+'. I would like to ask: '+(document.getElementById('ask').value.trim()||'What should I know about this and what are my next steps?');
+
+go(4);
+}
+
+function saveNotesAndContinue(){
+const edited=document.getElementById('editNotes').value.trim();
+if(edited){document.getElementById('scriptText').textContent=edited;}
+go(5);
+}
+
+function finishReminder(skip){
+const box=document.getElementById('reminderResult');
+box.style.display='block';
+
+if(skip){
+box.innerHTML='<b>No reminder planned</b><p>You can explore this feature another time.</p>';
+}else{
+const d=document.getElementById('reminderDate').value||'Date not selected';
+const t=document.getElementById('reminderTime').value||'Time not selected';
+const ty=document.getElementById('reminderType').value;
+const note=document.getElementById('reminderNote').value;
+
+box.innerHTML='<b>Reminder plan preview</b><p>'+ty+'<br>'+d+' · '+t+(note?'<br>'+note:'')+'</p><p>This is a preview only. No notification has been scheduled.</p>';
+}
+
+setTimeout(()=>go(6),350);
+}
+
+document.getElementById('topLang').addEventListener('change',e=>{
+L=e.target.value.replace(' (planned)','');
+document.getElementById('langNote').textContent=L==='English'?'English is selected for this demonstration.':'This language is planned but not translated in this prototype. The demonstration remains in English.';
+});
+</script>
+</body>
+</html>
